@@ -1,0 +1,11 @@
+# Score source (regenerate: python video/scripts/audio.py)
+video/audio/*.wav
+
+# Render intermediates
+video/out/_tile.jpg
+video/out/film_silent.mp4
+
+# Python
+__pycache__/
+*.pyc
+.venv/
