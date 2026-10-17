@@ -8,7 +8,8 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 PORT = int(os.environ.get("PORT", "8080"))
 
 FILES = [
-    ("alzheimers_10_tips.mp4", "The film", "1920×1080 · 30 fps · 2:04 · H.264 + AAC", "38 MB", True),
+    ("alzheimers_10_tips.mp4", "The film — master 1080p", "1920×1080 · 30 fps · 2:04 · H.264 + AAC · upload this", "38 MB", True),
+    ("alzheimers_10_tips_720p.mp4", "The film — light 720p", "1280×720 · 30 fps · 2:04 · fast download", "9.1 MB", False),
     ("thumbnail.png", "YouTube thumbnail", "1280×720 · under YouTube's 2 MB limit", "1.4 MB", False),
     ("alzheimers_10_tips.srt", "Captions (SRT)", "29 cues, timed to the picture", "3 KB", False),
     ("poster.png", "Poster still", "1920×1080 · community post / embed", "2.4 MB", False),
@@ -69,6 +70,11 @@ PAGE = """<!doctype html>
   <p class="note">Every file is served directly from the render workspace. The film has passed a
   full decode test (no errors) and carries its own original, royalty-free score.
   Thumbnail is 1280×720 and under YouTube’s 2 MB limit.</p>
+
+  <p class="note" style="margin-top:22px">Backup links on GitHub (public, permanent):
+  <a style="color:var(--amber)" href="https://github.com/Heartaker/Heartaker/releases/tag/v1.0-alzheimers-tips">release page</a> ·
+  <a style="color:var(--amber)" href="https://github.com/Heartaker/Heartaker/raw/arena/580c9563-heartaker/video/out/alzheimers_10_tips.mp4">1080p master</a> ·
+  <a style="color:var(--amber)" href="https://github.com/Heartaker/Heartaker/raw/arena/580c9563-heartaker/video/out/alzheimers_10_tips_720p.mp4">720p light</a></p>
 </div></body></html>
 """
 
