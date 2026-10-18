@@ -124,7 +124,17 @@ export async function OfferExplorer({
         <p className="text-sm text-ink-muted" role="status">
           {t.common.showing} {result.total} {t.common.results}
         </p>
-        <SortSelect locale={locale} />
+        {/*
+          SortSelect reads useSearchParams(). Any component that does must sit
+          inside a Suspense boundary, or Next.js bails the whole page out of
+          server rendering and logs a "missing suspense with CSR bailout"
+          error in the browser console.
+        */}
+        <Suspense
+          fallback={<span className="h-8 w-44 rounded-lg bg-surface-alt" aria-hidden="true" />}
+        >
+          <SortSelect locale={locale} />
+        </Suspense>
       </div>
 
       {result.offers.length === 0 ? (

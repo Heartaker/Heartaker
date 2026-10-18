@@ -1,11 +1,18 @@
 'use client';
 
-import { useState } from 'react';
+import { use, useState } from 'react';
 import { getDictionary } from '@/lib/i18n/dictionaries';
 import type { Locale } from '@/lib/types';
 
-export default function UnsubscribePage({ params }: { params: { locale: Locale } }) {
-  const t = getDictionary(params.locale);
+export default function UnsubscribePage({
+  params,
+}: {
+  // Next 15 hands route params to the page as a Promise; `use()` unwraps it
+  // inside a client component.
+  params: Promise<{ locale: Locale }>;
+}) {
+  const { locale } = use(params);
+  const t = getDictionary(locale);
   const [email, setEmail] = useState('');
   const [done, setDone] = useState(false);
   const [error, setError] = useState(false);
