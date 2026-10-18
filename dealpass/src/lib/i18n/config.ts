@@ -5,6 +5,7 @@ export const RTL_LOCALES: readonly Locale[] = ['ar'];
 
 /** Re-exported so consumers import locale constants from a single module. */
 export { LOCALES };
+export type { Locale };
 
 export function isLocale(value: string | undefined | null): value is Locale {
   return !!value && (LOCALES as readonly string[]).includes(value);

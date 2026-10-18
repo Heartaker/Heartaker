@@ -52,7 +52,7 @@ function negotiateFromHeader(header: string | null): string | null {
     .sort((a, b) => b.quality - a.quality);
 
   for (const { tag } of ranked) {
-    const base = tag.split('-')[0];
+    const base = tag.split('-')[0] ?? '';
     if (LOCALES.includes(base as (typeof LOCALES)[number])) return base;
   }
   return null;
