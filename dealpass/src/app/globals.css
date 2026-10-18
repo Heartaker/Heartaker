@@ -1,0 +1,151 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ==========================================================================
+   Brand tokens
+   These are the defaults. The administration dashboard overrides them at
+   runtime by writing inline custom properties on <html>, so rebranding never
+   requires a rebuild. See src/app/[locale]/layout.tsx.
+   ========================================================================== */
+:root {
+  --brand: 15 118 110;        /* teal 700 */
+  --brand-50: 240 253 250;
+  --brand-100: 204 251 241;
+  --brand-200: 153 246 228;
+  --brand-300: 94 234 212;
+  --brand-400: 45 212 191;
+  --brand-500: 20 184 166;
+  --brand-600: 13 148 136;
+  --brand-700: 15 118 110;
+  --brand-800: 17 94 89;
+  --brand-900: 19 78 74;
+  --brand-950: 4 47 46;
+
+  --accent: 245 158 11;       /* amber 500 */
+  --accent-500: 245 158 11;
+  --accent-600: 217 119 6;
+
+  --ink: 17 24 39;
+  --ink-muted: 100 116 139;
+  --surface: 255 255 255;
+  --surface-alt: 248 250 252;
+  --line: 226 232 240;
+
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, 'Noto Sans', 'Noto Sans Arabic', sans-serif;
+  --font-display: 'Inter', ui-sans-serif, system-ui, 'Segoe UI', Roboto,
+    'Noto Sans Arabic', sans-serif;
+
+  --radius-card: 0.875rem;
+}
+
+.dark {
+  --ink: 237 242 247;
+  --ink-muted: 148 163 184;
+  --surface: 15 23 42;
+  --surface-alt: 30 41 59;
+  --line: 51 65 85;
+  --brand: 45 212 191;
+  --brand-700: 45 212 191;
+  --brand-800: 94 234 212;
+}
+
+@layer base {
+  * {
+    border-color: rgb(var(--line));
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-surface text-ink antialiased;
+    font-family: var(--font-sans);
+    text-rendering: optimizeLegibility;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    @apply font-semibold tracking-tight;
+  }
+
+  /* Visible, consistent focus ring — WCAG 2.4.7 */
+  :focus-visible {
+    outline: 2px solid rgb(var(--brand-600));
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* Respect users who ask for reduced motion — WCAG 2.3.3 */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .card {
+    @apply rounded-card border border-line bg-surface;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg font-medium
+           transition-colors disabled:cursor-not-allowed disabled:opacity-60;
+  }
+  .btn-primary {
+    @apply btn bg-brand-700 text-white hover:bg-brand-800;
+  }
+  .btn-accent {
+    @apply btn bg-accent-500 text-white hover:bg-accent-600;
+  }
+  .btn-outline {
+    @apply btn border border-line bg-surface text-ink hover:bg-surface-alt;
+  }
+  .btn-ghost {
+    @apply btn text-ink hover:bg-surface-alt;
+  }
+  .btn-sm  { @apply px-3 py-1.5 text-sm; }
+  .btn-md  { @apply px-4 py-2 text-sm; }
+  .btn-lg  { @apply px-6 py-3 text-base; }
+
+  .input {
+    @apply w-full rounded-lg border border-line bg-surface px-3 py-2 text-sm text-ink
+           placeholder:text-ink-muted/70 focus:border-brand-500 focus:outline-none
+           focus:ring-2 focus:ring-brand-500/30;
+  }
+
+  .label {
+    @apply mb-1.5 block text-sm font-medium text-ink;
+  }
+
+  .badge {
+    @apply inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium;
+  }
+
+  /* Screen-reader-only, but focusable (skip links) */
+  .sr-only-focusable {
+    @apply sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4
+           focus:z-50 focus:rounded-lg focus:bg-brand-700 focus:px-4 focus:py-2 focus:text-white;
+  }
+}
+
+/* Arabic typography: slightly larger line-height and a font that has proper
+   Arabic coverage. */
+[dir='rtl'] {
+  font-family: var(--font-sans);
+  line-height: 1.75;
+}
+[dir='rtl'] .rtl-flip {
+  transform: scaleX(-1);
+}
