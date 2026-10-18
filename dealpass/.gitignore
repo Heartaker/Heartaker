@@ -10,3 +10,4 @@ next-env.d.ts
 .env.*.local
 coverage/
 .DS_Store
+.local-admin-token.txt
