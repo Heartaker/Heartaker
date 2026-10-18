@@ -54,26 +54,28 @@ interface DemoMerchantSeed {
   countries: string[];
   currency: string;
   blurbFr: string;
+  /** Category slugs this merchant's offers belong to. */
+  categories: string[];
 }
 
 const MERCHANT_SEEDS: DemoMerchantSeed[] = [
-  { name: 'Novalys',      vertical: 'shopping', domain: 'novalys.example',      countries: ['FR','DZ','MA','TN','BE','DE','ES','IT'], currency: 'EUR', blurbFr: 'Marque fictive d’électronique grand public créée pour la démonstration.' },
-  { name: 'Kairova',      vertical: 'shopping', domain: 'kairova.example',      countries: ['FR','DZ','MA','TN','ES','IT'],            currency: 'EUR', blurbFr: 'Enseigne fictive de mode et d’accessoires.' },
-  { name: 'Lumavia',      vertical: 'shopping', domain: 'lumavia.example',      countries: ['FR','BE','CH','MA','AE'],                 currency: 'EUR', blurbFr: 'Marque fictive de beauté et de soins.' },
-  { name: 'Orvantis',     vertical: 'shopping', domain: 'orvantis.example',     countries: ['FR','BE','DE','ES'],                      currency: 'EUR', blurbFr: 'Enseigne fictive de mobilier et de jardin.' },
-  { name: 'Pulsario',     vertical: 'shopping', domain: 'pulsario.example',     countries: ['FR','DZ','MA','TN','SA','AE'],            currency: 'EUR', blurbFr: 'Boutique fictive de sport et de plein air.' },
-  { name: 'Marjoline',    vertical: 'shopping', domain: 'marjoline.example',    countries: ['FR','BE'],                                currency: 'EUR', blurbFr: 'Supermarché fictif en ligne.' },
-  { name: 'PetitSonge',   vertical: 'shopping', domain: 'petitsonge.example',   countries: ['FR','BE','CH','MA'],                      currency: 'EUR', blurbFr: 'Enseigne fictive de puériculture et de jouets.' },
-  { name: 'Azurway',      vertical: 'travel',   domain: 'azurway.example',      countries: ['FR','DZ','MA','TN','ES','IT','GB','AE'],  currency: 'EUR', blurbFr: 'Compagnie fictive de vols et de billetterie.' },
-  { name: 'Nomadia',      vertical: 'travel',   domain: 'nomadia.example',      countries: ['FR','DZ','MA','TN','ES','IT','AE','SA','EG','QA','TR','US','GB','DE'], currency: 'EUR', blurbFr: 'Chaîne hôtelière fictive.' },
-  { name: 'Routex',       vertical: 'travel',   domain: 'routex.example',       countries: ['FR','ES','IT','MA','TN','AE','TR'],       currency: 'EUR', blurbFr: 'Loueur fictif de véhicules.' },
-  { name: 'Visitia',      vertical: 'travel',   domain: 'visitia.example',      countries: ['FR','ES','IT','MA','EG','AE','TR'],       currency: 'EUR', blurbFr: 'Plateforme fictive d’activités et de visites.' },
-  { name: 'Saphir Tours', vertical: 'travel',   domain: 'saphirtours.example',  countries: ['FR','DZ','MA','TN','EG','TR'],            currency: 'EUR', blurbFr: 'Voyagiste fictif spécialisé dans les séjours.' },
-  { name: 'Skilloria',    vertical: 'courses',  domain: 'skilloria.example',    countries: ['FR','DZ','MA','TN','BE','CH','CA','AE','SA','EG','QA','KW','US','GB'], currency: 'EUR', blurbFr: 'Plateforme fictive de formations en ligne.' },
-  { name: 'Libralis',     vertical: 'courses',  domain: 'libralis.example',     countries: ['FR','BE','CH','CA','MA','AE'],            currency: 'EUR', blurbFr: 'Librairie fictive de livres numériques.' },
-  { name: 'Cloudivia',    vertical: 'software', domain: 'cloudivia.example',    countries: ['FR','DZ','MA','TN','BE','CH','CA','AE','SA','EG','QA','KW','US','GB','DE'], currency: 'EUR', blurbFr: 'Éditeur fictif de logiciels professionnels.' },
-  { name: 'Hostelia',     vertical: 'software', domain: 'hostelia.example',     countries: ['FR','DZ','MA','TN','BE','CH','CA','AE','SA','EG','QA','KW','US','GB','DE'], currency: 'EUR', blurbFr: 'Hébergeur fictif et fournisseur de services réseau.' },
-  { name: 'Appvantage',   vertical: 'software', domain: 'appvantage.example',   countries: ['FR','DZ','MA','TN','BE','CH','CA','AE','SA','EG','QA','KW','US','GB','DE'], currency: 'EUR', blurbFr: 'Éditeur fictif d’applications mobiles.' },
+  { name: 'Novalys',      vertical: 'shopping', domain: 'novalys.example',      countries: ['FR','DZ','MA','TN','BE','DE','ES','IT'], currency: 'EUR', blurbFr: 'Marque fictive d’électronique grand public créée pour la démonstration.', categories: ['electronique'] },
+  { name: 'Kairova',      vertical: 'shopping', domain: 'kairova.example',      countries: ['FR','DZ','MA','TN','ES','IT'],            currency: 'EUR', blurbFr: 'Enseigne fictive de mode et d’accessoires.', categories: ['mode'] },
+  { name: 'Lumavia',      vertical: 'shopping', domain: 'lumavia.example',      countries: ['FR','BE','CH','MA','AE'],                 currency: 'EUR', blurbFr: 'Marque fictive de beauté et de soins.', categories: ['beaute-sante'] },
+  { name: 'Orvantis',     vertical: 'shopping', domain: 'orvantis.example',     countries: ['FR','BE','DE','ES'],                      currency: 'EUR', blurbFr: 'Enseigne fictive de mobilier et de jardin.', categories: ['maison-jardin'] },
+  { name: 'Pulsario',     vertical: 'shopping', domain: 'pulsario.example',     countries: ['FR','DZ','MA','TN','SA','AE'],            currency: 'EUR', blurbFr: 'Boutique fictive de sport et de plein air.', categories: ['sport-plein-air'] },
+  { name: 'Marjoline',    vertical: 'shopping', domain: 'marjoline.example',    countries: ['FR','BE'],                                currency: 'EUR', blurbFr: 'Supermarché fictif en ligne.', categories: ['courses-alimentaires'] },
+  { name: 'PetitSonge',   vertical: 'shopping', domain: 'petitsonge.example',   countries: ['FR','BE','CH','MA'],                      currency: 'EUR', blurbFr: 'Enseigne fictive de puériculture et de jouets.', categories: ['bebe-enfants'] },
+  { name: 'Azurway',      vertical: 'travel',   domain: 'azurway.example',      countries: ['FR','DZ','MA','TN','ES','IT','GB','AE'],  currency: 'EUR', blurbFr: 'Compagnie fictive de vols et de billetterie.', categories: ['vols'] },
+  { name: 'Nomadia',      vertical: 'travel',   domain: 'nomadia.example',      countries: ['FR','DZ','MA','TN','ES','IT','AE','SA','EG','QA','TR','US','GB','DE'], currency: 'EUR', blurbFr: 'Chaîne hôtelière fictive.', categories: ['hotels'] },
+  { name: 'Routex',       vertical: 'travel',   domain: 'routex.example',       countries: ['FR','ES','IT','MA','TN','AE','TR'],       currency: 'EUR', blurbFr: 'Loueur fictif de véhicules.', categories: ['location-voiture'] },
+  { name: 'Visitia',      vertical: 'travel',   domain: 'visitia.example',      countries: ['FR','ES','IT','MA','EG','AE','TR'],       currency: 'EUR', blurbFr: 'Plateforme fictive d’activités et de visites.', categories: ['activites'] },
+  { name: 'Saphir Tours', vertical: 'travel',   domain: 'saphirtours.example',  countries: ['FR','DZ','MA','TN','EG','TR'],            currency: 'EUR', blurbFr: 'Voyagiste fictif spécialisé dans les séjours.', categories: ['sejours'] },
+  { name: 'Skilloria',    vertical: 'courses',  domain: 'skilloria.example',    countries: ['FR','DZ','MA','TN','BE','CH','CA','AE','SA','EG','QA','KW','US','GB'], currency: 'EUR', blurbFr: 'Plateforme fictive de formations en ligne.', categories: ['formations'] },
+  { name: 'Libralis',     vertical: 'courses',  domain: 'libralis.example',     countries: ['FR','BE','CH','CA','MA','AE'],            currency: 'EUR', blurbFr: 'Librairie fictive de livres numériques.', categories: ['livres-numeriques'] },
+  { name: 'Cloudivia',    vertical: 'software', domain: 'cloudivia.example',    countries: ['FR','DZ','MA','TN','BE','CH','CA','AE','SA','EG','QA','KW','US','GB','DE'], currency: 'EUR', blurbFr: 'Éditeur fictif de logiciels professionnels.', categories: ['logiciels-saas'] },
+  { name: 'Hostelia',     vertical: 'software', domain: 'hostelia.example',     countries: ['FR','DZ','MA','TN','BE','CH','CA','AE','SA','EG','QA','KW','US','GB','DE'], currency: 'EUR', blurbFr: 'Hébergeur fictif et fournisseur de services réseau.', categories: ['hebergement-vpn'] },
+  { name: 'Appvantage',   vertical: 'software', domain: 'appvantage.example',   countries: ['FR','DZ','MA','TN','BE','CH','CA','AE','SA','EG','QA','KW','US','GB','DE'], currency: 'EUR', blurbFr: 'Éditeur fictif d’applications mobiles.', categories: ['apps-mobile'] },
 ];
 
 // ---------------------------------------------------------------------------
@@ -88,27 +90,81 @@ interface OfferTemplate {
   kind: 'percentage' | 'fixed_amount' | 'none';
   hasCode: boolean;
   termsFr: string;
+  termsEn?: string;
+  termsAr?: string;
 }
 
 const TEMPLATES: OfferTemplate[] = [
-  { offerType: 'coupon_code',        titleFr: '{pct}% de réduction sur tout le site',        titleEn: '{pct}% off sitewide',                    titleAr: 'خصم {pct}% على كل الموقع',            discountValue: 15, kind: 'percentage',   hasCode: true,  termsFr: 'Valable une seule fois par client. Non cumulable avec les soldes en cours. Voir conditions sur le site du marchand.' },
-  { offerType: 'coupon_code',        titleFr: '{pct}% dès 60 € d’achat',                     titleEn: '{pct}% off orders over €60',             titleAr: 'خصم {pct}% للطلبات فوق 60 €',          discountValue: 10, kind: 'percentage',   hasCode: true,  termsFr: 'Montant minimum de commande requis, hors frais de port. Non cumulable avec une autre offre.' },
-  { offerType: 'free_shipping',      titleFr: 'Livraison offerte sans minimum d’achat',      titleEn: 'Free shipping, no minimum spend',        titleAr: 'شحن مجاني بدون حد أدنى',             discountValue: 0,  kind: 'none',         hasCode: false, termsFr: 'Livraison standard offerte. Zones éloignées et livraison express exclues.' },
-  { offerType: 'new_customer_offer', titleFr: '{pct}% pour votre première commande',         titleEn: '{pct}% off your first order',            titleAr: 'خصم {pct}% على أول طلب',             discountValue: 20, kind: 'percentage',   hasCode: true,  termsFr: 'Réservé aux nouveaux clients. Une utilisation par foyer. Vérification d’éligibilité au paiement.' },
-  { offerType: 'flash_sale',         titleFr: 'Ventes flash : jusqu’à {pct}% sur une sélection', titleEn: 'Flash sale: up to {pct}% off select items', titleAr: 'تخفيضات سريعة: حتى {pct}%',      discountValue: 40, kind: 'percentage',   hasCode: false, termsFr: 'Offre valable pendant la durée annoncée et dans la limite des stocks disponibles.' },
-  { offerType: 'automatic_discount', titleFr: '{amt} € de remise automatique dès 80 €',      titleEn: '€{amt} off automatically over €80',      titleAr: 'خصم {amt} € تلقائياً فوق 80 €',       discountValue: 12, kind: 'fixed_amount', hasCode: false, termsFr: 'Remise appliquée automatiquement au panier. Conditions de seuil vérifiées avant paiement.' },
-  { offerType: 'cashback',           titleFr: '{pct}% de cashback sur vos achats',           titleEn: '{pct}% cashback on your purchases',      titleAr: 'استرداد نقدي {pct}%',               discountValue: 5,  kind: 'percentage',   hasCode: false, termsFr: 'Le cashback est crédité après validation de la commande par le marchand. Délai de traitement variable.' },
-  { offerType: 'exclusive_offer',    titleFr: 'Offre exclusive DealPass : {pct}% + livraison offerte', titleEn: 'DealPass exclusive: {pct}% off + free shipping', titleAr: 'عرض حصري: {pct}% + شحن مجاني', discountValue: 25, kind: 'percentage', hasCode: true, termsFr: 'Offre réservée aux visiteurs DealPass. Code utilisable une fois par compte client.' },
-  { offerType: 'seasonal_sale',      titleFr: 'Soldes de saison : jusqu’à {pct}%',           titleEn: 'Seasonal sale: up to {pct}% off',        titleAr: 'تخفيضات موسمية: حتى {pct}%',         discountValue: 50, kind: 'percentage',   hasCode: false, termsFr: 'Remises appliquées sur les articles marqués en promotion. Les prix affichés peuvent varier.' },
-  { offerType: 'price_drop',         titleFr: 'Baisse de prix : {pct}% sur une sélection',   titleEn: 'Price drop: {pct}% off select lines',    titleAr: 'انخفاض أسعار: {pct}%',               discountValue: 30, kind: 'percentage',   hasCode: false, termsFr: 'Prix susceptibles d’évoluer. Vérifiez le prix final sur le site du marchand avant achat.' },
-  { offerType: 'travel_deal',        titleFr: '{pct}% sur les forfaits voyage',              titleEn: '{pct}% off travel packages',             titleAr: 'خصم {pct}% على باقات السفر',         discountValue: 18, kind: 'percentage',   hasCode: true,  termsFr: 'Selon disponibilités et périodes de voyage. Frais de dossier et taxes non inclus.' },
-  { offerType: 'hotel_deal',         titleFr: '{pct}% sur votre séjour',                     titleEn: '{pct}% off your stay',                   titleAr: 'خصم {pct}% على الإقامة',             discountValue: 22, kind: 'percentage',   hasCode: true,  termsFr: 'Sélection d’hôtels participants. Annulation selon les conditions de chaque établissement.' },
-  { offerType: 'flight_deal',        titleFr: 'Jusqu’à {pct}% sur une sélection de vols',    titleEn: 'Up to {pct}% off selected flights',      titleAr: 'حتى {pct}% على رحلات مختارة',        discountValue: 35, kind: 'percentage',   hasCode: false, termsFr: 'Tarifs soumis à disponibilité au moment de la réservation. Bagages et options en supplément.' },
-  { offerType: 'car_rental_deal',    titleFr: '{pct}% sur la location de voiture',           titleEn: '{pct}% off car hire',                    titleAr: 'خصم {pct}% على تأجير السيارات',       discountValue: 15, kind: 'percentage',   hasCode: true,  termsFr: 'Âge minimum et permis requis selon le pays. Assurance et franchise non incluses.' },
-  { offerType: 'activity_deal',      titleFr: '{pct}% sur les activités et visites',         titleEn: '{pct}% off activities & attractions',    titleAr: 'خصم {pct}% على الأنشطة',             discountValue: 20, kind: 'percentage',   hasCode: false, termsFr: 'Réservation préalable requise. Créneaux soumis à disponibilité.' },
-  { offerType: 'course_deal',        titleFr: '{pct}% sur les formations en ligne',          titleEn: '{pct}% off online courses',              titleAr: 'خصم {pct}% على الدورات',             discountValue: 60, kind: 'percentage',   hasCode: true,  termsFr: 'Accès à vie selon la formule choisie. Offre réservée aux nouveaux inscrits.' },
-  { offerType: 'software_deal',      titleFr: '{pct}% sur l’abonnement annuel',              titleEn: '{pct}% off the annual plan',             titleAr: 'خصم {pct}% على الاشتراك السنوي',      discountValue: 30, kind: 'percentage',   hasCode: true,  termsFr: 'Remise applicable à la première année d’abonnement. Renouvellement au tarif en vigueur.' },
+  { offerType: 'coupon_code',        titleFr: '{pct}% de réduction sur tout le site',        titleEn: '{pct}% off sitewide',                    titleAr: 'خصم {pct}% على كل الموقع',            discountValue: 15, kind: 'percentage',   hasCode: true,  termsFr: 'Valable une seule fois par client. Non cumulable avec les soldes en cours. Voir conditions sur le site du marchand.', termsEn: 'Valid once per customer. Cannot be combined with ongoing sale prices. See the merchant’s site for full conditions.', termsAr: 'صالح لمرة واحدة لكل عميل. لا يمكن دمجه مع أسعار التخفيضات الحالية. راجع شروط الموقع.' },
+  { offerType: 'coupon_code',        titleFr: '{pct}% dès 60 € d’achat',                     titleEn: '{pct}% off orders over €60',             titleAr: 'خصم {pct}% للطلبات فوق 60 €',          discountValue: 10, kind: 'percentage',   hasCode: true,  termsFr: 'Montant minimum de commande requis, hors frais de port. Non cumulable avec une autre offre.', termsEn: 'Minimum order value required, excluding shipping. Cannot be combined with another offer.', termsAr: 'يُلزم حد أدنى للطلب، دون احتساب الشحن. لا يمكن دمجه مع عرض آخر.' },
+  { offerType: 'free_shipping',      titleFr: 'Livraison offerte sans minimum d’achat',      titleEn: 'Free shipping, no minimum spend',        titleAr: 'شحن مجاني بدون حد أدنى',             discountValue: 0,  kind: 'none',         hasCode: false, termsFr: 'Livraison standard offerte. Zones éloignées et livraison express exclues.', termsEn: 'Free standard shipping. Remote areas and express delivery are excluded.', termsAr: 'شحن قياسي مجاني. المناطق البعيدة والتوصيل السريع مستثناة.' },
+  { offerType: 'new_customer_offer', titleFr: '{pct}% pour votre première commande',         titleEn: '{pct}% off your first order',            titleAr: 'خصم {pct}% على أول طلب',             discountValue: 20, kind: 'percentage',   hasCode: true,  termsFr: 'Réservé aux nouveaux clients. Une utilisation par foyer. Vérification d’éligibilité au paiement.', termsEn: 'For new customers only. One use per household. Eligibility is checked at checkout.', termsAr: 'للعملاء الجدد فقط. استخدام واحد لكل أسرة. يُتحقق من الأهلية عند الدفع.' },
+  { offerType: 'flash_sale',         titleFr: 'Ventes flash : jusqu’à {pct}% sur une sélection', titleEn: 'Flash sale: up to {pct}% off select items', titleAr: 'تخفيضات سريعة: حتى {pct}%',      discountValue: 40, kind: 'percentage',   hasCode: false, termsFr: 'Offre valable pendant la durée annoncée et dans la limite des stocks disponibles.', termsEn: 'Valid for the stated duration and while stocks last.', termsAr: 'صالح خلال المدة المعلنة وفي حدود المخزون المتوفر.' },
+  { offerType: 'automatic_discount', titleFr: '{amt} € de remise automatique dès 80 €',      titleEn: '€{amt} off automatically over €80',      titleAr: 'خصم {amt} € تلقائياً فوق 80 €',       discountValue: 12, kind: 'fixed_amount', hasCode: false, termsFr: 'Remise appliquée automatiquement au panier. Conditions de seuil vérifiées avant paiement.', termsEn: 'Discount applied automatically at the basket. Threshold conditions are verified before payment.', termsAr: 'يُطبق الخصم تلقائياً على السلة. تُتحقق من شروط الحد الأدنى قبل الدفع.' },
+  { offerType: 'cashback',           titleFr: '{pct}% de cashback sur vos achats',           titleEn: '{pct}% cashback on your purchases',      titleAr: 'استرداد نقدي {pct}%',               discountValue: 5,  kind: 'percentage',   hasCode: false, termsFr: 'Le cashback est crédité après validation de la commande par le marchand. Délai de traitement variable.', termsEn: 'Cashback is credited once the merchant has validated the order. Processing time varies.', termsAr: 'يُضاف الاسترداد النقدي بعد تأكيد المتجر للطلب. مدة المعالجة متفاوتة.' },
+  { offerType: 'exclusive_offer',    titleFr: 'Offre exclusive DealPass : {pct}% + livraison offerte', titleEn: 'DealPass exclusive: {pct}% off + free shipping', titleAr: 'عرض حصري: {pct}% + شحن مجاني', discountValue: 25, kind: 'percentage', hasCode: true, termsFr: 'Offre réservée aux visiteurs DealPass. Code utilisable une fois par compte client.', termsEn: 'Reserved for DealPass visitors. Code can be used once per customer account.', termsAr: 'حصري لزوّار ديل باس. يمكن استخدام الكود مرة واحدة لكل حساب.' },
+  { offerType: 'seasonal_sale',      titleFr: 'Soldes de saison : jusqu’à {pct}%',           titleEn: 'Seasonal sale: up to {pct}% off',        titleAr: 'تخفيضات موسمية: حتى {pct}%',         discountValue: 50, kind: 'percentage',   hasCode: false, termsFr: 'Remises appliquées sur les articles marqués en promotion. Les prix affichés peuvent varier.', termsEn: 'Discounts apply to items marked down. Displayed prices may vary.', termsAr: 'تُطبق الخصومات على الأصناف المخفّضة. قد تختلف الأسعار المعروضة.' },
+  { offerType: 'price_drop',         titleFr: 'Baisse de prix : {pct}% sur une sélection',   titleEn: 'Price drop: {pct}% off select lines',    titleAr: 'انخفاض أسعار: {pct}%',               discountValue: 30, kind: 'percentage',   hasCode: false, termsFr: 'Prix susceptibles d’évoluer. Vérifiez le prix final sur le site du marchand avant achat.', termsEn: 'Prices are subject to change. Check the final price on the merchant’s site before buying.', termsAr: 'الأسعار قابلة للتغيير. تحقق من السعر النهائي في موقع المتجر قبل الشراء.' },
+  { offerType: 'travel_deal',        titleFr: '{pct}% sur les forfaits voyage',              titleEn: '{pct}% off travel packages',             titleAr: 'خصم {pct}% على باقات السفر',         discountValue: 18, kind: 'percentage',   hasCode: true,  termsFr: 'Selon disponibilités et périodes de voyage. Frais de dossier et taxes non inclus.', termsEn: 'Subject to availability and travel periods. Booking fees and taxes are not included.', termsAr: 'حسب التوفر ومواسم السفر. رسوم الحجز والضرائب غير مشمولة.' },
+  { offerType: 'hotel_deal',         titleFr: '{pct}% sur votre séjour',                     titleEn: '{pct}% off your stay',                   titleAr: 'خصم {pct}% على الإقامة',             discountValue: 22, kind: 'percentage',   hasCode: true,  termsFr: 'Sélection d’hôtels participants. Annulation selon les conditions de chaque établissement.', termsEn: 'Selected participating hotels. Cancellation follows each property’s own policy.', termsAr: 'فنادق مختارة مشاركة. تخضع الإلغاءات لسياسة كل منشأة.' },
+  { offerType: 'flight_deal',        titleFr: 'Jusqu’à {pct}% sur une sélection de vols',    titleEn: 'Up to {pct}% off selected flights',      titleAr: 'حتى {pct}% على رحلات مختارة',        discountValue: 35, kind: 'percentage',   hasCode: false, termsFr: 'Tarifs soumis à disponibilité au moment de la réservation. Bagages et options en supplément.', termsEn: 'Fares are subject to availability at the time of booking. Baggage and options cost extra.', termsAr: 'تخضع الأسعار للتوفر وقت الحجز. الأمتعة والخيارات بحساب إضافي.' },
+  { offerType: 'car_rental_deal',    titleFr: '{pct}% sur la location de voiture',           titleEn: '{pct}% off car hire',                    titleAr: 'خصم {pct}% على تأجير السيارات',       discountValue: 15, kind: 'percentage',   hasCode: true,  termsFr: 'Âge minimum et permis requis selon le pays. Assurance et franchise non incluses.', termsEn: 'Minimum age and driving licence requirements vary by country. Insurance and excess are not included.', termsAr: 'يختلف الحد الأدنى للعمر ومتطلبات الرخصة حسب البلد. التأمين والتحمّل غير مشمولين.' },
+  { offerType: 'activity_deal',      titleFr: '{pct}% sur les activités et visites',         titleEn: '{pct}% off activities & attractions',    titleAr: 'خصم {pct}% على الأنشطة',             discountValue: 20, kind: 'percentage',   hasCode: false, termsFr: 'Réservation préalable requise. Créneaux soumis à disponibilité.', termsEn: 'Advance booking required. Time slots are subject to availability.', termsAr: 'يلزم الحجز المسبق. تخضع المواعيد للتوفر.' },
+  { offerType: 'course_deal',        titleFr: '{pct}% sur les formations en ligne',          titleEn: '{pct}% off online courses',              titleAr: 'خصم {pct}% على الدورات',             discountValue: 60, kind: 'percentage',   hasCode: true,  termsFr: 'Accès à vie selon la formule choisie. Offre réservée aux nouveaux inscrits.', termsEn: 'Lifetime access depends on the plan chosen. Reserved for new enrolments.', termsAr: 'يعتمد الوصول الدائم على الباقة المختارة. مخصص للمسجلين الجدد.' },
+  { offerType: 'software_deal',      titleFr: '{pct}% sur l’abonnement annuel',              titleEn: '{pct}% off the annual plan',             titleAr: 'خصم {pct}% على الاشتراك السنوي',      discountValue: 30, kind: 'percentage',   hasCode: true,  termsFr: 'Remise applicable à la première année d’abonnement. Renouvellement au tarif en vigueur.', termsEn: 'Discount applies to the first year of subscription. Renewal is at the prevailing rate.', termsAr: 'يُطبق الخصم على السنة الأولى من الاشتراك. التجديد بالسعر الساري.' },
 ];
+
+/**
+ * Builds the connector-supplied language variants for one generated offer.
+ *
+ * These are stored in `offer_translations` with `generated_by_ai = false`.
+ * They are human-authored template strings shipped with the connector, not
+ * machine-generated text, and the flag says so.
+ */
+function buildTranslations(
+  template: OfferTemplate,
+  pct: number,
+  amt: number,
+  merchantName: string,
+): Record<string, { title: string; shortDescription: string; fullDescription: string; terms: string | null }> {
+  const fill = (value: string) => value.replace('{pct}', String(pct)).replace('{amt}', String(amt));
+
+  const fr = fill(template.titleFr);
+  const en = fill(template.titleEn);
+  const ar = fill(template.titleAr);
+
+  const demoSuffix: Record<string, string> = {
+    fr: ' Offre de démonstration générée localement par DealPass.',
+    en: ' Demonstration offer generated locally by DealPass.',
+    ar: ' عرض توضيحي أُنشئ محلياً بواسطة ديل باس.',
+  };
+  const demoFull: Record<string, string> = {
+    fr: `Cette offre est fictive : produite par le connecteur de démonstration DealPass, elle ne correspond à aucune promotion réelle et le code associé n’est utilisable nulle part.`,
+    en: `This offer is fictional: produced by the DealPass demonstration connector, it does not correspond to any real promotion and the associated code cannot be used anywhere.`,
+    ar: `هذا العرض خيالي: أُنشئ عبر موصل العرض التوضيحي في ديل باس، ولا يقابل أي عرض حقيقي ولا يمكن استخدام الكود المرافق في أي مكان.`,
+  };
+
+  return {
+    fr: {
+      title: fr,
+      shortDescription: `${fr}.${demoSuffix.fr}`,
+      fullDescription: `${fr}. ${demoFull.fr}`,
+      terms: template.termsFr,
+    },
+    en: {
+      title: en,
+      shortDescription: `${en}.${demoSuffix.en}`,
+      fullDescription: `${en}. ${demoFull.en}`,
+      terms: template.termsEn ?? template.termsFr,
+    },
+    ar: {
+      title: ar,
+      shortDescription: `${ar}.${demoSuffix.ar}`,
+      fullDescription: `${ar}. ${demoFull.ar}`,
+      terms: template.termsAr ?? template.termsFr,
+    },
+  };
+}
 
 const TRAVEL_TYPES: OfferType[] = ['travel_deal','hotel_deal','flight_deal','car_rental_deal','activity_deal'];
 const COURSE_TYPES: OfferType[] = ['course_deal'];
@@ -268,6 +324,8 @@ export class DemoConnector implements AffiliateConnector {
           sourceReference: `demo:${slugify(merchant.name)}:${i + 1}`,
           isExclusive: template.offerType === 'exclusive_offer',
           isFeatured: rand() < 0.25,
+          categorySlugs: merchant.categories,
+          translations: buildTranslations(template, pct, amt, merchant.name),
         });
       }
     }

@@ -121,6 +121,118 @@ export interface UpsertOutcome {
   status: string;
 }
 
+
+/**
+ * Writes the connector-supplied language variants into `offer_translations`.
+ *
+ * Every row is marked `generated_by_ai = false`: this text came from the
+ * source connector, not from a language model. AI-generated text takes the
+ * same table with the flag set, so an administrator can always tell the two
+ * apart — the specification requires exactly that separation.
+ */
+async function syncOfferTranslations(offerId: string, offer: NormalizedOffer): Promise<void> {
+  const sourceLanguage = offer.languageCodes[0] ?? 'fr';
+
+  // Always record the source text, even when no extra variants were supplied.
+  const variants: Array<[string, { title: string; shortDescription?: string | null; fullDescription?: string | null; terms?: string | null }]> = [
+    [
+      sourceLanguage,
+      {
+        title: offer.title,
+        shortDescription: offer.shortDescription ?? null,
+        fullDescription: offer.fullDescription ?? null,
+        terms: offer.termsAndConditions ?? null,
+      },
+    ],
+  ];
+
+  for (const [language, text] of Object.entries(offer.translations ?? {})) {
+    if (language === sourceLanguage) continue;
+    if (!text?.title) continue;
+    variants.push([language, text]);
+  }
+
+  for (const [language, text] of variants) {
+    await query(
+      `INSERT INTO offer_translations (
+         offer_id, language_code, translated_title, translated_short_description,
+         translated_full_description, translated_terms,
+         generated_by_ai, ai_provider, reviewed_at
+       )
+       VALUES ($1, $2, $3, $4, $5, $6, FALSE, NULL, now())
+       ON CONFLICT (offer_id, language_code) DO UPDATE
+         SET translated_title            = CASE WHEN offer_translations.generated_by_ai
+                                                THEN offer_translations.translated_title
+                                                ELSE EXCLUDED.translated_title END,
+             translated_short_description = CASE WHEN offer_translations.generated_by_ai
+                                                THEN offer_translations.translated_short_description
+                                                ELSE EXCLUDED.translated_short_description END,
+             translated_full_description  = CASE WHEN offer_translations.generated_by_ai
+                                                THEN offer_translations.translated_full_description
+                                                ELSE EXCLUDED.translated_full_description END,
+             translated_terms             = CASE WHEN offer_translations.generated_by_ai
+                                                THEN offer_translations.translated_terms
+                                                ELSE EXCLUDED.translated_terms END,
+             updated_at = now()`,
+      [
+        offerId,
+        language,
+        text.title,
+        text.shortDescription ?? null,
+        text.fullDescription ?? null,
+        text.terms ?? null,
+      ],
+    );
+  }
+}
+
+/**
+ * Links an offer to the categories it belongs to.
+ *
+ * Only slugs that actually exist are linked. An unknown slug is skipped
+ * silently on purpose: a connector must not be able to invent taxonomy by
+ * typo, and an unlinked offer is visible on the data-quality audit.
+ */
+async function syncOfferCategories(offerId: string, offer: NormalizedOffer): Promise<number> {
+  const slugs = [...new Set((offer.categorySlugs ?? []).filter(Boolean))];
+  if (slugs.length === 0) return 0;
+
+  const categories = await query<{ id: string; slug: string }>(
+    'SELECT id, slug FROM categories WHERE slug = ANY($1::text[])',
+    [slugs],
+  );
+
+  if (categories.length === 0) return 0;
+
+  // Remove links that are no longer current, then re-add the live set.
+  await query(
+    `DELETE FROM offer_categories
+      WHERE offer_id = $1
+        AND category_id NOT IN (
+          SELECT id FROM categories WHERE slug = ANY($2::text[])
+        )`,
+    [offerId, categories.map((category) => category.slug)],
+  );
+
+  await query(
+    `INSERT INTO offer_categories (offer_id, category_id)
+     SELECT $1, id FROM categories WHERE slug = ANY($2::text[])
+     ON CONFLICT DO NOTHING`,
+    [offerId, categories.map((category) => category.slug)],
+  );
+
+  return categories.length;
+}
+
+/**
+ * Post-write bookkeeping shared by the insert and update paths of
+ * `upsertOffer`: translations, then category links.
+ */
+async function syncOfferRelations(offerId: string, offer: NormalizedOffer): Promise<void> {
+  await syncOfferTranslations(offerId, offer);
+  await syncOfferCategories(offerId, offer);
+}
+
 export async function upsertOffer(
   offer: NormalizedOffer,
   networkSlug: string,
@@ -205,6 +317,9 @@ export async function upsertOffer(
         validation.score,
       ],
     );
+    // Even a rejected offer keeps its text and taxonomy, so the review queue
+    // shows the moderators what they are looking at.
+    await syncOfferRelations(row!.id, offer);
     return { action: 'rejected', offerId: row!.id, score: validation.score, status: 'rejected' };
   }
 
@@ -278,6 +393,7 @@ export async function upsertOffer(
         offer.isFeatured ?? false,
       ],
     );
+    await syncOfferRelations(existing.id, offer);
     return { action: 'updated', offerId: existing.id, score: validation.score, status: newStatus };
   }
 
@@ -328,6 +444,7 @@ export async function upsertOffer(
       publicationStatus === 'approved' ? nowIso : null,
     ],
   );
+  await syncOfferRelations(row!.id, offer);
   return { action: 'imported', offerId: row!.id, score: validation.score, status: publicationStatus === 'approved' ? 'published' : publicationStatus };
 }
 

@@ -110,6 +110,29 @@ export interface NormalizedOffer {
   sourceReference?: string | null;
   isExclusive?: boolean;
   isFeatured?: boolean;
+
+  /**
+   * Category slugs this offer belongs to. The connector knows its own
+   * catalogue, so it declares the mapping rather than the importer guessing
+   * from the offer type.
+   */
+  categorySlugs?: string[];
+
+  /**
+   * Text the connector was able to supply in languages other than the source
+   * one. Stored in `offer_translations` with `generated_by_ai = false`, so an
+   * administrator can always tell connector-supplied text from AI-generated
+   * text apart.
+   */
+  translations?: Record<string, OfferTranslationInput>;
+}
+
+/** One language variant supplied alongside an offer. */
+export interface OfferTranslationInput {
+  title: string;
+  shortDescription?: string | null;
+  fullDescription?: string | null;
+  terms?: string | null;
 }
 
 export interface NormalizedTransaction {

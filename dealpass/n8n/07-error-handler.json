@@ -1,0 +1,120 @@
+{
+  "name": "DealPass 07 - Central Error Handling",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "trigger-error",
+      "name": "On Workflow Error",
+      "type": "n8n-nodes-base.errorTrigger",
+      "typeVersion": 1,
+      "position": [
+        240,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Accept a payload from any of the other seven workflows.\n// Everything is optional: the handler must never itself fail, or the original\n// error would be lost.\nconst input = $input.first().json ?? {};\nconst exec  = input.execution ?? {};\n\nconst message =\n  input.message ??\n  exec.error?.message ??\n  exec.lastNodeExecuted ? `Node \"${exec.lastNodeExecuted}\" failed` :\n  'Unspecified DealPass workflow error';\n\nreturn [{\n  json: {\n    workflow: input.workflow ?? exec.workflowData?.name ?? 'unknown',\n    severity: input.severity ?? 'error',\n    message: String(message),\n    context: {\n      node: exec.lastNodeExecuted ?? null,\n      executionId: exec.id ?? $execution.id,\n      retryOf: exec.retryOf ?? null,\n      mode: exec.mode ?? null,\n    },\n  },\n}];\n",
+        "mode": "runOnceForAllItems"
+      },
+      "id": "code-normalise",
+      "name": "Normalise Error",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        460,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.DEALPASS_URL }}/api/internal/errors",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "content-type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{}",
+        "options": {
+          "timeout": 120000,
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        },
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "nodeCredentialType": "httpHeaderAuth"
+      },
+      "id": "http-ingest",
+      "name": "Record Error",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        680,
+        300
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "DEALPASS_INTERNAL",
+          "name": "DealPass Internal Token"
+        }
+      },
+      "retryOnFail": true,
+      "maxTries": 4,
+      "waitBetweenTries": 5000
+    }
+  ],
+  "connections": {
+    "On Workflow Error": {
+      "main": [
+        [
+          {
+            "node": "Normalise Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalise Error": {
+      "main": [
+        [
+          {
+            "node": "Record Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true
+  },
+  "staticData": null,
+  "pinData": {},
+  "meta": {
+    "instanceId": "dealpass"
+  },
+  "tags": [
+    {
+      "name": "dealpass"
+    },
+    {
+      "name": "error-handling"
+    }
+  ],
+  "versionId": "dealpass-error-handler"
+}
