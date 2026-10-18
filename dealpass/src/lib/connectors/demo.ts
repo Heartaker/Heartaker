@@ -350,7 +350,8 @@ export class DemoConnector implements AffiliateConnector {
         merchantExternalId: 'demo-novalys',
         title: 'Remise à vérifier sur les accessoires',
         shortDescription: 'Offre importée sans conditions détaillées — doit passer en revue humaine.',
-        fullDescription: 'Enregistrement de test : les conditions sont absentes, le score de confiance sera donc insuffisant pour une publication automatique.',
+        fullDescription:
+          'Enregistrement de test fictif : les conditions sont absentes, le score de confiance sera donc insuffisant pour une publication automatique. Cette offre ne correspond à aucune promotion réelle.',
         couponCode: 'NOVA7781',
         offerType: 'coupon_code',
         discountType: 'percentage',
@@ -377,7 +378,7 @@ export class DemoConnector implements AffiliateConnector {
         merchantExternalId: 'demo-kairova',
         title: 'Offre avec domaine de destination non autorisé',
         shortDescription: 'Enregistrement de test : le domaine ne correspond pas au marchand.',
-        fullDescription: 'Enregistrement de test destiné à être rejeté automatiquement par le contrôle de domaine.',
+        fullDescription: 'Enregistrement de test fictif, destiné à être rejeté automatiquement par le contrôle de domaine. Il ne correspond à aucune promotion réelle.',
         couponCode: 'KAIROVA99',
         offerType: 'coupon_code',
         discountType: 'percentage',
@@ -404,7 +405,7 @@ export class DemoConnector implements AffiliateConnector {
         merchantExternalId: 'demo-lumavia',
         title: 'Code promo annoncé mais absent',
         shortDescription: 'Enregistrement de test : offre typée code sans code renseigné.',
-        fullDescription: 'Enregistrement de test destiné à être rejeté automatiquement : un code est annoncé mais aucun code n’est fourni.',
+        fullDescription: 'Enregistrement de test fictif, destiné à être rejeté automatiquement : un code est annoncé mais aucun code n’est fourni. Il ne correspond à aucune promotion réelle.',
         couponCode: null, // ← deliberate: coupon_code type with no code
         offerType: 'coupon_code',
         discountType: 'percentage',
